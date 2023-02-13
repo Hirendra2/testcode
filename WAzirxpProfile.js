@@ -87,17 +87,15 @@ const userdetails = async (req, res, next) => {
       await getuserdata(data).then(async (re) => {
           console.log("getuserdata**", re);
           res.status(201).send({status:true,data:re})
-
-        })
-        .catch((e) => {
+        }).catch((e) => {
           console.log("eesgetdecodedata", e);
         });
-    })
-    .catch((e) => {
+    }).catch((e) => {
       console.log("eeR33", e);
       res.status(404).send({ status: false, msg: "Failed" });
     });
 };
+
 
 async function getdecodedata(myAddress) {
   return new Promise(async function executor(resolve, reject) {

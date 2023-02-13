@@ -7,23 +7,10 @@ var Web3 = require("web3");
 const web3 = new Web3(Web3.givenProvider || url);
 const abi = fs.readFileSync("./abis/WAzirxpProfile.json", "utf-8");
 
+const abiArray = JSON.parse(abi);
 
-let  data = "0x5Ac32b12daF2D5942403D3fc97f168Fa485C795C";
-const polyganbalance = async (data) => {
-    return new Promise(async function executor(resolve, reject) {
-      const abiArray = JSON.parse(abi);
-      var contract = new web3.eth.Contract(
-        abiArray,
-        process.env.WAzirxpProfile_CONTRACT_ADDRESS
-      );
-      let polyganbal = await contract.methods.datas(data).call();
-      console.log("hhhhhhhhh",polyganbal)
-      //return resolve(amounts);
-    }).catch((e) => {
-      console.log("polyganbal", e);
-      return reject(e);
-    });
-  };
-
-
-  polyganbalance(data);
+var deployedContract = web3.eth.contract(abiArray).at("0x85e583a9B659FDae31AFab7b06F08327D29910d5");
+//now you should be able to access contract methods
+deployedContract.agencies.call({from:address}, function(err,data){
+console.log(data);
+});

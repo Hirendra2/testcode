@@ -46,6 +46,7 @@ contract HHHHH {
     }
 
     function decodedata(address user)  public   view  returns (bytes memory){
+              require(user == msg.sender);
               return  datas[user];
     }
 
