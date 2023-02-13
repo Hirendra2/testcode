@@ -1,0 +1,230 @@
+[
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			}
+		],
+		"name": "addOwner",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "NAME",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "Email",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "DATEOFBIRTH",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "COUNTRY",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "Address",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "PANNUMBER",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "AADHAARNUMBER",
+				"type": "uint256"
+			}
+		],
+		"name": "hencode",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "NAME",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "Email",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "DATEOFBIRTH",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "COUNTRY",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "Address",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "PANNUMBER",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "AADHAARNUMBER",
+				"type": "uint256"
+			}
+		],
+		"name": "hencodeedit",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "NAME",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "Email",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "DATEOFBIRTH",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "COUNTRY",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "Address",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "PANNUMBER",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "AADHAARNUMBER",
+				"type": "uint256"
+			}
+		],
+		"name": "hOwnerencodeedit",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			}
+		],
+		"name": "removeOwner",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes",
+				"name": "data",
+				"type": "bytes"
+			}
+		],
+		"name": "decode",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "_NAME",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_Email",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_DATEOFBIRTH",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_COUNTRY",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_Address",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_PANNUMBER",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_AADHAARNUMBER",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			}
+		],
+		"name": "decodedata",
+		"outputs": [
+			{
+				"internalType": "bytes",
+				"name": "",
+				"type": "bytes"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
