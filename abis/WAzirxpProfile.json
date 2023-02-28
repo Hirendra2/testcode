@@ -3,6 +3,29 @@
 		"inputs": [
 			{
 				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "friends",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "types",
+				"type": "string"
+			}
+		],
+		"name": "addaddress",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
 				"name": "owner",
 				"type": "address"
 			}
@@ -15,6 +38,11 @@
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
 				"internalType": "string",
 				"name": "NAME",
 				"type": "string"
@@ -25,9 +53,9 @@
 				"type": "string"
 			},
 			{
-				"internalType": "uint256",
+				"internalType": "string",
 				"name": "DATEOFBIRTH",
-				"type": "uint256"
+				"type": "string"
 			},
 			{
 				"internalType": "string",
@@ -45,9 +73,9 @@
 				"type": "string"
 			},
 			{
-				"internalType": "uint256",
+				"internalType": "string",
 				"name": "AADHAARNUMBER",
-				"type": "uint256"
+				"type": "string"
 			}
 		],
 		"name": "hencode",
@@ -58,6 +86,11 @@
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
 				"internalType": "string",
 				"name": "NAME",
 				"type": "string"
@@ -68,9 +101,9 @@
 				"type": "string"
 			},
 			{
-				"internalType": "uint256",
+				"internalType": "string",
 				"name": "DATEOFBIRTH",
-				"type": "uint256"
+				"type": "string"
 			},
 			{
 				"internalType": "string",
@@ -88,9 +121,9 @@
 				"type": "string"
 			},
 			{
-				"internalType": "uint256",
+				"internalType": "string",
 				"name": "AADHAARNUMBER",
-				"type": "uint256"
+				"type": "string"
 			}
 		],
 		"name": "hencodeedit",
@@ -101,6 +134,11 @@
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
 				"internalType": "string",
 				"name": "NAME",
 				"type": "string"
@@ -111,9 +149,9 @@
 				"type": "string"
 			},
 			{
-				"internalType": "uint256",
+				"internalType": "string",
 				"name": "DATEOFBIRTH",
-				"type": "uint256"
+				"type": "string"
 			},
 			{
 				"internalType": "string",
@@ -131,12 +169,30 @@
 				"type": "string"
 			},
 			{
-				"internalType": "uint256",
+				"internalType": "string",
 				"name": "AADHAARNUMBER",
-				"type": "uint256"
+				"type": "string"
 			}
 		],
 		"name": "hOwnerencodeedit",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "whitelistadd",
+				"type": "string"
+			}
+		],
+		"name": "removeaddress",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -170,6 +226,11 @@
 		"name": "decode",
 		"outputs": [
 			{
+				"internalType": "address",
+				"name": "_user",
+				"type": "address"
+			},
+			{
 				"internalType": "string",
 				"name": "_NAME",
 				"type": "string"
@@ -180,9 +241,9 @@
 				"type": "string"
 			},
 			{
-				"internalType": "uint256",
+				"internalType": "string",
 				"name": "_DATEOFBIRTH",
-				"type": "uint256"
+				"type": "string"
 			},
 			{
 				"internalType": "string",
@@ -200,9 +261,9 @@
 				"type": "string"
 			},
 			{
-				"internalType": "uint256",
+				"internalType": "string",
 				"name": "_AADHAARNUMBER",
-				"type": "uint256"
+				"type": "string"
 			}
 		],
 		"stateMutability": "pure",
@@ -222,6 +283,49 @@
 				"internalType": "bytes",
 				"name": "",
 				"type": "bytes"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			}
+		],
+		"name": "getalladdress",
+		"outputs": [
+			{
+				"internalType": "string[]",
+				"name": "",
+				"type": "string[]"
+			},
+			{
+				"internalType": "string[]",
+				"name": "",
+				"type": "string[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "getNoFFaddress",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",

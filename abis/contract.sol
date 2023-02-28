@@ -15,11 +15,9 @@ contract HHHHH {
         require(msg.sender == _owner || _owners[msg.sender] == 1);
         _;
     }
-
     constructor() public {
         _owner = msg.sender;
     }
-
     function addOwner(address owner) public isOwner {
         _owners[owner] = 1;
     }
@@ -27,30 +25,54 @@ contract HHHHH {
     function removeOwner(address owner) public isOwner {
         _owners[owner] = 0;
     }
-
     mapping(address => bytes) private datas;
-
-    function hencode(string memory NAME, string memory Email, uint256 DATEOFBIRTH, string memory COUNTRY, string memory Address, string memory PANNUMBER,  uint256 AADHAARNUMBER ) public {
-        bytes memory data = (abi.encode( NAME, Email,DATEOFBIRTH, COUNTRY, Address,PANNUMBER,  AADHAARNUMBER));
-        datas[msg.sender] = data;
+    function hencode(address user,string memory NAME, string memory Email, string memory DATEOFBIRTH, string memory COUNTRY, string memory Address, string memory PANNUMBER, string memory AADHAARNUMBER ) public {
+        bytes memory data = (abi.encode(user, NAME, Email,DATEOFBIRTH, COUNTRY, Address,PANNUMBER,  AADHAARNUMBER));
+        datas[user] = data;
     }
 
-        function hencodeedit(string memory NAME, string memory Email, uint256 DATEOFBIRTH, string memory COUNTRY, string memory Address, string memory PANNUMBER,  uint256 AADHAARNUMBER ) public {
-        bytes memory data = abi.encode( NAME, Email,DATEOFBIRTH, COUNTRY, Address,PANNUMBER,  AADHAARNUMBER);
-        datas[msg.sender] = data;
+    function hencodeedit(address user,string memory NAME, string memory Email, string memory DATEOFBIRTH, string memory COUNTRY, string memory Address, string memory PANNUMBER, string memory AADHAARNUMBER ) public {
+        bytes memory data = abi.encode(user, NAME, Email,DATEOFBIRTH, COUNTRY, Address,PANNUMBER,  AADHAARNUMBER);
+        datas[user] = data;
     }
 
-        function hOwnerencodeedit(string memory NAME, string memory Email, uint256 DATEOFBIRTH, string memory COUNTRY, string memory Address, string memory PANNUMBER,  uint256 AADHAARNUMBER ) public validOwner {
-        bytes memory data = abi.encode( NAME, Email,DATEOFBIRTH, COUNTRY, Address,PANNUMBER,  AADHAARNUMBER);
-        datas[msg.sender] = data;
+    function hOwnerencodeedit(address user,string memory NAME, string memory Email, string memory DATEOFBIRTH, string memory COUNTRY, string memory Address, string memory PANNUMBER, string memory AADHAARNUMBER ) public validOwner {
+        bytes memory data = abi.encode( user, NAME, Email,DATEOFBIRTH, COUNTRY, Address,PANNUMBER,  AADHAARNUMBER);
+        datas[user] = data;
     }
 
     function decodedata(address user)  public   view  returns (bytes memory){
-              require(user == msg.sender);
               return  datas[user];
+    } 
+
+    function decode(bytes memory data) public  pure  returns (address _user,string memory _NAME,string memory _Email, string memory _DATEOFBIRTH, string memory _COUNTRY, string memory _Address, string memory _PANNUMBER, string memory _AADHAARNUMBER ) {       
+        ( _user,_NAME,_Email, _DATEOFBIRTH,_COUNTRY,_Address, _PANNUMBER, _AADHAARNUMBER) = abi.decode( data, (address,string, string, string, string, string, string, string) );
     }
 
-    function decode(bytes memory data) public  pure  returns (string memory _NAME,string memory _Email, uint256 _DATEOFBIRTH, string memory _COUNTRY, string memory _Address, string memory _PANNUMBER, uint256 _AADHAARNUMBER ) {       
-        ( _NAME,_Email, _DATEOFBIRTH,_COUNTRY,_Address, _PANNUMBER, _AADHAARNUMBER) = abi.decode( data, (string, string, uint256, string, string, string, uint256) );
+
+    mapping(address => uint256) public getNoFFaddress;
+    mapping(address => string[]) private alladdress;
+    mapping(address => string[]) private alltype;
+
+    function addaddress(address  user,string memory friends,string memory types) public { 
+        alladdress[user].push(friends);
+        alltype[user].push(types);
+        getNoFFaddress[user] += 1;
+    }
+
+    function removeaddress(address  user,string calldata whitelistadd) public {
+        uint16 length = uint16(alladdress[user].length);
+        for (uint256 i=0; i < length; i++) {  
+           if (keccak256(abi.encodePacked(alladdress[user][i])) == keccak256(abi.encodePacked(whitelistadd))  ){    
+                delete alltype[user][i];
+                delete alladdress[user][i];
+                getNoFFaddress[user] -= 1;
+                 break;
+            }
+        }
+    }
+  
+    function getalladdress(address user)  external view  returns (string[] memory,string[] memory)  {         
+        return (alladdress[user],alltype[user]);
     }
 }

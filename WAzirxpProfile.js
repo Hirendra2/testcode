@@ -25,7 +25,7 @@ const userkyc = async (req, res, next) => {
   var contract = new web3.eth.Contract(
     abiArray,
     process.env.WAzirxpProfile_CONTRACT_ADDRESS,
-    { from: myAddress }
+    { from: process.env.myAddresss }
   );
   var chainID = await web3.eth.net.getId();
   console.log(`ChainID: ${chainID}\n------------------------`);
@@ -36,7 +36,7 @@ const userkyc = async (req, res, next) => {
   console.log("gasLimit", gasLimit);
 
   var rawTransaction = {
-    from: myAddress,
+    from: myAddresss,
     gasPrice: web3.utils.toHex(gasPriceGwei * 1e9),
     gasLimit: web3.utils.toHex(gasLimit),
     to: process.env.WAzirxpProfile_CONTRACT_ADDRESS,
