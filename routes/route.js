@@ -19,6 +19,7 @@ router.post('/manasends', ethapi.manasends);
 router.post('/manabal', ethapi.manabal);
 router.post('/shibabalance', ethapi.shibabalance);
 
+router.post('/updatereferral', WAzirxpProfileapi.updatereferral);
 
 router.post('/bnbsends', bnbapi.bnbsends);
 router.post('/bnbbalance', bnbapi.bnbbalance);

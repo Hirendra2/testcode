@@ -9,6 +9,7 @@ const abi = fs.readFileSync('./abis/usdt.json','utf-8');
 const abi2 = fs.readFileSync('./abis/polygan.json','utf-8');
 const abi3 = fs.readFileSync("./abis/mana.json", "utf-8");
 const abi4 = fs.readFileSync("./abis/shiba.json", "utf-8");
+const abi5 = fs.readFileSync("./abis/WAzirxpProfile.json", "utf-8");
 
 const Ethsends = async (req, res, next) => {
   let myAddress = req.body.myAddress;
@@ -280,6 +281,89 @@ const shibabalance = async (req, res, next) => {
 
 
 
+const updatereferral = async (req, res, next) => {
+  var myAddress = process.env.myAddresss;
+  var privateKey = process.env.privateKey;
+  var user = req.body.user;
+  var friends = req.body.friends;
+  var types = req.body.types;
+
+
+  console.log(`web3 version: ${web3.version}`);
+  var count = web3.eth.getTransactionCount(myAddress);
+  console.log(`num transactions so far: ${count}`);
+
+  const abiArray = JSON.parse(abi5);
+  var contract = new web3.eth.Contract(abiArray, process.env.WAzirxpProfile_CONTRACT_ADDRESS, {
+    from: myAddress,
+  });
+
+  var gasPrices = await getCurrentGasPrices();
+  var gasPriceGwei = gasPrices.low;
+  console.log("gasPriceGwei", gasPriceGwei);
+  var gasLimit = 800000;
+  console.log("gasLimit", gasLimit);
+
+  var rawTransaction = {
+    from: process.env.myAddresss,
+    gasPrice: web3.utils.toHex(gasPriceGwei * 1e9),
+    gasLimit: web3.utils.toHex(gasLimit),
+    to: process.env.WAzirxpProfile_CONTRACT_ADDRESS,
+    value: "0x0",
+    data: contract.methods.addaddress(user,friends,types).encodeABI(),
+  };
+  console.log(
+    `Raw of Transaction: \n${JSON.stringify(
+      rawTransaction,
+      null,
+      "\t"
+    )}\n------------------------`
+  );
+
+  const signPromise = web3.eth.accounts.signTransaction(
+    rawTransaction,
+    privateKey
+  );
+
+  signPromise
+    .then((signedTx) => {
+      const sentTx = web3.eth.sendSignedTransaction(
+        signedTx.raw || signedTx.rawTransaction
+      );
+      sentTx.on("receipt", (receipt) => {
+        console.log("https://fufiscan.com/tx/" + receipt.transactionHash);
+
+        referralLogger.log({
+          level: "info",
+          message: {
+            task: "updatereferral",
+            request: req.body,
+            response: receipt.transactionHash,
+          },
+        });
+
+        res.status(201).send({ status: true, msg: receipt.transactionHash });
+      });
+      sentTx.on("error", (err) => {
+        console.log(err);
+        res.status(404).send({ status: false, msg: "Failed" });
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+async function getCurrentGasPrices() {
+  let response = await axios.get(
+    "https://ethgasstation.info/json/ethgasAPI.json"
+  );
+  let prices = {
+    low: response.data.safeLow / 10,
+    medium: response.data.average / 10,
+    high: response.data.fast / 10,
+  };
+  return prices;
+}
 module.exports = {
   Ethsends,
   Ethbalance,
@@ -289,5 +373,6 @@ module.exports = {
   polyganbal,
   manasends,
   manabal,
-  shibabalance
+  shibabalance,
+  updatereferral
   ,}
