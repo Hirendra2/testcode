@@ -42,7 +42,7 @@ contract HHHHH {
     }
 
     function decodedata(address user)  public   view  returns (bytes memory){
-              return  datas[user];
+        return  datas[user];
     } 
 
     function decode(bytes memory data) public  pure  returns (address _user,string memory _NAME,string memory _Email, string memory _DATEOFBIRTH, string memory _COUNTRY, string memory _Address, string memory _PANNUMBER, string memory _AADHAARNUMBER ) {       
@@ -55,19 +55,21 @@ contract HHHHH {
     mapping(address => string[]) private alltype;
 
     function addaddress(address  user,string memory friends,string memory types) public { 
+        require(msg.sender==_owner,"you are not a owner");
         alladdress[user].push(friends);
         alltype[user].push(types);
         getNoFFaddress[user] += 1;
     }
 
     function removeaddress(address  user,string calldata whitelistadd) public {
+        require(msg.sender==_owner,"you are not a owner");
         uint16 length = uint16(alladdress[user].length);
         for (uint256 i=0; i < length; i++) {  
            if (keccak256(abi.encodePacked(alladdress[user][i])) == keccak256(abi.encodePacked(whitelistadd))  ){    
                 delete alltype[user][i];
                 delete alladdress[user][i];
                 getNoFFaddress[user] -= 1;
-                 break;
+                break;
             }
         }
     }

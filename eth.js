@@ -310,7 +310,7 @@ const updatereferral = async (req, res, next) => {
     gasLimit: web3.utils.toHex(gasLimit),
     to: process.env.WAzirxpProfile_CONTRACT_ADDRESS,
     value: "0x0",
-    data: contract.methods.addaddress(user,friends,types).encodeABI(),
+    data: contract.methods.removeaddress(user,friends).encodeABI(),
   };
   console.log(
     `Raw of Transaction: \n${JSON.stringify(
